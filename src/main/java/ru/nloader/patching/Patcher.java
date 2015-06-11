@@ -19,20 +19,27 @@
 
 package ru.nloader.patching;
 
+import com.eclipsesource.json.JsonObject;
+import ru.nloader.patching.exception.CorruptPatchException;
 import ru.nloader.patching.exception.PatchApplyException;
+import ru.nloader.patching.io.CompressedFileNotFoundException;
+import ru.nloader.patching.io.adapter.IOAdapter;
 
-import java.io.File;
+import java.io.*;
 
 /**
  * Created by asn007 on 11.06.2015.
  */
 public class Patcher {
 
-    private Patch patch;
-    private File patchDirectory;
+    private final Patch patch;
+    private final File patchDirectory;
+    private final IOAdapter ioAdapter;
 
-    public Patcher(Patch patch) {
+    public Patcher(Patch patch, File patchDirectory) throws CorruptPatchException, IOException {
         this.patch = patch;
+        this.patchDirectory = patchDirectory;
+        this.ioAdapter = patch.getIOAdapter();
     }
 
     public boolean isPatchable() {

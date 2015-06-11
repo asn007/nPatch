@@ -5,45 +5,42 @@ apply plugin: 'eclipse'
 sourceCompatibility = 1.8
 version = '0.1'
 
-allprojects {
 
-    repositories {
-        mavenCentral()
-    }
-
-    configurations {
-        includeInJar {
-            description = 'Package dependencies into jar file'
-            transitive = true
-        }
-    }
-
-    task "create-dirs" << {
-        project.sourceSets*.each {
-            it.allSource.srcDirs.each {
-                println "$it" - "${projectDir}${File.separator}";
-                if (!(it.exists()))
-                    it.mkdirs();
-            }
-        }
-    }
-
-    task listDependencies << {
-        configurations.each {
-            Configuration cfg -> println '*** CONFIGURATION ' + cfg.name + ' (' + cfg.description + ')' +'***'
-                cfg.each {
-                    File file -> println file.name
-                }
-        }
-    }
-
-    task wrapper(type: Wrapper) {
-        gradleVersion = '1.12'
-        distributionUrl = 'http://services.gradle.org/distributions/gradle-1.12-all.zip'
-    }
-
-
+repositories {
+    mavenCentral()
 }
+
+configurations {
+    includeInJar {
+        description = 'Package dependencies into jar file'
+        transitive = true
+    }
+}
+
+task "create-dirs" << {
+    project.sourceSets*.each {
+        it.allSource.srcDirs.each {
+            println "$it" - "${projectDir}${File.separator}";
+            if (!(it.exists()))
+                it.mkdirs();
+        }
+    }
+}
+
+task listDependencies << {
+    configurations.each {
+        Configuration cfg -> println '*** CONFIGURATION ' + cfg.name + ' (' + cfg.description + ')' +'***'
+            cfg.each {
+                File file -> println file.name
+            }
+    }
+}
+
+task wrapper(type: Wrapper) {
+    gradleVersion = '1.12'
+    distributionUrl = 'http://services.gradle.org/distributions/gradle-1.12-all.zip'
+}
+
 
 
 dependencies {

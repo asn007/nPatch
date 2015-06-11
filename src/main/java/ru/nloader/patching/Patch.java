@@ -19,22 +19,39 @@
 
 package ru.nloader.patching;
 
+import com.eclipsesource.json.JsonObject;
 import ru.nloader.patching.exception.CorruptPatchException;
+import ru.nloader.patching.io.CompressedFileNotFoundException;
+import ru.nloader.patching.io.adapter.IOAdapter;
 
-import java.io.File;
+import java.io.*;
+import java.text.ParseException;
 import java.util.Date;
 
 /**
  * Created by asn007 on 11.06.2015.
  */
 public class Patch {
-    private File patchFile;
+    private final IOAdapter ioAdapter;
+    private final File patchFile;
     private Date releaseDate;
     private PatchNote patchNote;
 
-    public Patch(File patchFile) throws CorruptPatchException {
+
+
+    public Patch(File patchFile, IOAdapter adapter) throws Exception {
         this.patchFile = patchFile;
+        this.ioAdapter = adapter;
+        try(BufferedReader reader = new BufferedReader(new InputStreamReader(new ByteArrayInputStream(ioAdapter.getFile(Constants.PATCH_DESCRIPTOR_FILE).getData())))) {
+            JsonObject patchDescriptorObject = JsonObject.readFrom(reader);
+            JsonObject patchNoteObject = patchDescriptorObject.get("patchnote").asObject();
+            patchNote = new PatchNote(patchNoteObject.getString("title", ""), patchNoteObject.getString("text", ""));
+            releaseDate = Constants.DEFAULT_DATE_FORMAT.parse(patchDescriptorObject.getString("releaseDate", "01.07.12 12:00"));
+
+        }
     }
+
+    public IOAdapter getIOAdapter() { return this.ioAdapter; }
 
     public PatchNote getPatchNote() {
         return this.patchNote;
