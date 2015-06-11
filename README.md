@@ -1,7 +1,3 @@
-<<<<<<< HEAD
-nPatch
-=======
-
 Simple patching library for use with nLoader
 
 The patch file is just a simple ZIP archive, which contains the following:
@@ -14,8 +10,3 @@ It also contains an array of deleted files and patch notes.
 
 The second one is where the patch is stored. The directory structure inside the patch resembles the original directory structure. The filenames are kept the same, except for they have additional extension appended.
 Therefore, /mc/game/game.jar becomes /mc/game/game.jar.patch
-
-=======
-# nPatch
-Simple patching library
->>>>>>> 9c1628caa7d5b8787e64d12cd3749b9c893b0809
