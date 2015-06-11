@@ -1,2 +1,0 @@
-# nPatch
-Simple patching library
