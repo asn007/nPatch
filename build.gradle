@@ -48,6 +48,7 @@ allprojects {
 
 dependencies {
     testCompile group: 'junit', name: 'junit', version: '4.11'
+    compile group: 'com.eclipsesource.minimal-json', name: 'minimal-json', version: '0.9.2'
     //includeInJar group: 'com.eclipsesource.minimal-json', name: 'minimal-json', version: '0.9.2'
     //includeInJar project(':bifrost')
     //includeInJar project(':nLogger')

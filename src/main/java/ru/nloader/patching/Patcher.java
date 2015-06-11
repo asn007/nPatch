@@ -1,7 +1,7 @@
 /*
  * Copyright (C) 2015 asn007 aka Andrey Sinitsyn <andrey.sin98@gmail.com>
  *
- *  This file (Patch.java) is part of nPatch.
+ *  This file (Patcher.java) is part of nPatch.
  *
  *      nPatch is free software: you can redistribute it and/or modify
  *      it under the terms of the GNU General Public License as published by
@@ -19,33 +19,43 @@
 
 package ru.nloader.patching;
 
-import ru.nloader.patching.exception.CorruptPatchException;
+import ru.nloader.patching.exception.PatchApplyException;
 
 import java.io.File;
-import java.util.Date;
 
 /**
  * Created by asn007 on 11.06.2015.
  */
-public class Patch {
-    private File patchFile;
-    private Date releaseDate;
-    private PatchNote patchNote;
+public class Patcher {
 
-    public Patch(File patchFile) throws CorruptPatchException {
-        this.patchFile = patchFile;
+    private Patch patch;
+    private File patchDirectory;
+
+    public Patcher(Patch patch) {
+        this.patch = patch;
     }
 
-    public PatchNote getPatchNote() {
-        return this.patchNote;
+    public boolean isPatchable() {
+        return false;
     }
 
-    public Date getReleaseDate() {
-        return releaseDate;
+    public void patch() throws PatchApplyException {
+
     }
 
-    public File getPatchFile() {
-        return patchFile;
+    public Patch getPatch() {
+        return patch;
     }
 
+    public void setPatch(Patch patch) {
+        this.patch = patch;
+    }
+
+    public File getPatchDirectory() {
+        return patchDirectory;
+    }
+
+    public void setPatchDirectory(File patchDirectory) {
+        this.patchDirectory = patchDirectory;
+    }
 }

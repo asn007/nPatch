@@ -1,7 +1,7 @@
 /*
  * Copyright (C) 2015 asn007 aka Andrey Sinitsyn <andrey.sin98@gmail.com>
  *
- *  This file (Patch.java) is part of nPatch.
+ *  This file (CorruptPatchException.java) is part of nPatch.
  *
  *      nPatch is free software: you can redistribute it and/or modify
  *      it under the terms of the GNU General Public License as published by
@@ -17,35 +17,10 @@
  *      along with nPatch.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package ru.nloader.patching;
-
-import ru.nloader.patching.exception.CorruptPatchException;
-
-import java.io.File;
-import java.util.Date;
+package ru.nloader.patching.exception;
 
 /**
  * Created by asn007 on 11.06.2015.
  */
-public class Patch {
-    private File patchFile;
-    private Date releaseDate;
-    private PatchNote patchNote;
-
-    public Patch(File patchFile) throws CorruptPatchException {
-        this.patchFile = patchFile;
-    }
-
-    public PatchNote getPatchNote() {
-        return this.patchNote;
-    }
-
-    public Date getReleaseDate() {
-        return releaseDate;
-    }
-
-    public File getPatchFile() {
-        return patchFile;
-    }
-
+public class CorruptPatchException extends Exception {
 }
