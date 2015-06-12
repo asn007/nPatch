@@ -54,15 +54,8 @@ public class Patcher {
         return patch;
     }
 
-    public void setPatch(Patch patch) {
-        this.patch = patch;
-    }
-
     public File getPatchDirectory() {
         return patchDirectory;
     }
-
-    public void setPatchDirectory(File patchDirectory) {
-        this.patchDirectory = patchDirectory;
-    }
+    
 }
