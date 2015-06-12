@@ -57,5 +57,5 @@ public class Patcher {
     public File getPatchDirectory() {
         return patchDirectory;
     }
-    
+
 }
